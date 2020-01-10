@@ -1,0 +1,20 @@
+const { gql } = require('apollo-server');
+
+const typeDefs = gql`
+
+ type Query{
+    me: User
+ }
+
+ type User {
+    username: String,
+    token: String
+  }
+
+ type Subscription {
+    tick: String
+  }
+
+`;
+
+module.exports= typeDefs;
