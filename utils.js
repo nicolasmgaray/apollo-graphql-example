@@ -1,5 +1,5 @@
 const isAuth = token => {
-  if (!token) throw new Error("no token provided");
+  if (!token) throw new Error("No token provided, add token on 'x-auth-token' header");
   return { username: "Harcoded Dummy User", token };
 };
 
@@ -18,16 +18,16 @@ const errorHandler = err => {
 };
 
 const wsConnectionHandler = (connectionParams, webSocket,context) => {
-  const user = isAuth(connectionParams["x-auth-token"]);
-  // ADD USER TO CONNECTED PEOPLE ARRAY
+  const user = isAuth(connectionParams["x-auth-token"]); 
   console.log("Connected ",user.username)
   context.user = user;
   return user;
 };
 
 const wsDisconnectionHandler = (connectionParams, context) => {
-  // REMOVE USER FROM CONNECTED PEOPLE ARRAY
-  console.log("Disconected ",context.user.username)
+  // Add custom disc logic
+  let user = context.user ? context.user.username : 'Unknown';
+  console.log("Disconected ",user)
 };
 
 module.exports = {
